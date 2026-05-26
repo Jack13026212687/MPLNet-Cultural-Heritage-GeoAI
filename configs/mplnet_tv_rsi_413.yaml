@@ -1,0 +1,78 @@
+# MPLNet Configuration for TV-RSI-413 Dataset
+
+model:
+  name: MPLNet
+  num_classes: 22
+  backbone: resnet50
+  pretrained: true
+  use_mamba: true
+  use_prompts: true
+  num_prompts: 16
+
+data:
+  dataset: TV-RSI-413
+  data_root: ./data/TV-RSI-413
+  img_size: [512, 512]
+  num_classes: 22
+  batch_size: 16
+  num_workers: 4
+
+  # TV-RSI-413 Class Labels
+  classes:
+    - background
+    - building
+    - road
+    - water
+    - vegetation
+    - farmland
+    - bare_soil
+    - temple
+    - ancestral_hall
+    - well
+    - pond
+    - fence
+    - bridge
+    - traditional_structure
+    - modern_building
+    - mountain
+    - forest
+    - grass
+    - cultivated_land
+    - construction_land
+    - cultural_heritage_site
+    - other
+
+training:
+  epochs: 100
+  optimizer: adamw
+  lr: 0.0001
+  weight_decay: 0.0001
+  lr_scheduler: cosine
+  warmup_epochs: 5
+
+  # Loss settings
+  loss:
+    type: edge_aware
+    edge_weight: 0.3
+
+  # Data augmentation
+  augmentation:
+    random_flip: true
+    random_rotate: true
+    color_jitter: true
+    normalize: true
+
+evaluation:
+  batch_size: 32
+  save_predictions: true
+  compute_metrics:
+    - miou
+    - mpa
+    - f1
+    - kappa
+
+checkpoint:
+  save_dir: ./checkpoints
+  save_top_k: 3
+  monitor: val_miou
+  mode: max
