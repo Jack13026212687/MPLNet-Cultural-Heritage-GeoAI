@@ -286,11 +286,133 @@
         </div>
     </section>
 
+    <!-- Quick Demo Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">04 — Quick Demo</span>
+                <h2>Try It in One Command</h2>
+            </div>
+            <div class="demo-content" style="max-width:800px;margin:0 auto;">
+                <div class="demo-card" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;">
+                    <h4 style="color:var(--charcoal);margin-bottom:16px;">Single-image Semantic Segmentation</h4>
+                    <pre style="background:var(--bg-dark);color:var(--accent-light);padding:16px;border-radius:var(--radius-sm);overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:0.85rem;">python demo/inference.py \
+    --model mcpnet \
+    --image sample_input/your_image.jpg \
+    --output sample_output/result.png</pre>
+                    <p style="color:var(--text-secondary);margin-top:16px;font-size:0.9rem;">Output: side-by-side visualisation — original image | 22-class colour overlay.</p>
+                    <div style="margin-top:16px;padding:12px 16px;background:var(--paper);border-radius:var(--radius-sm);border-left:3px solid var(--primary);">
+                        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">
+                            <strong>Weights:</strong> Trained model weights (.pth) are available upon reasonable academic request.
+                            Not included in this public repository.
+                        </p>
+                    </div>
+                    <div style="margin-top:12px;padding:12px 16px;background:var(--paper);border-radius:var(--radius-sm);border-left:3px solid var(--accent);">
+                        <p style="font-size:0.85rem;color:var(--text-muted);margin:0;">
+                            <strong>Dataset:</strong> TV-RSI-413 available via Baidu Netdisk. Contact the author for access link and extraction code.
+                        </p>
+                    </div>
+                    <a href="demo/README.md" class="btn btn-outline" style="margin-top:20px;">View Demo Docs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Architecture Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">05 — Model Architecture</span>
+                <h2>Three Models, One Research System</h2>
+            </div>
+            <div class="models-grid">
+                <div class="model-card visible">
+                    <div class="model-header">
+                        <h3>MCPNet</h3>
+                        <span class="model-badge">npj Heritage Science 2026</span>
+                    </div>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <span class="spec-label">Architecture</span>
+                            <span class="spec-value">ResNet-50 + Multi-scale Context-Perceptual Head</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Key Innovation</span>
+                            <span class="spec-value">3-branch dilation (1,3,9 RF) + CBAM attention</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Performance</span>
+                            <span class="spec-value">mAcc 34.7% | Acc 85.3% (Operational)</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Efficiency</span>
+                            <span class="spec-value">55.3M params | 198.5 GFLOPs | 16 FPS</span>
+                        </div>
+                    </div>
+                    <div class="model-code"><code>model = get_mcpnet(num_classes=22)</code></div>
+                </div>
+                <div class="model-card visible">
+                    <div class="model-header">
+                        <h3>MPLNet</h3>
+                        <span class="model-badge">PLOS ONE 2026</span>
+                    </div>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <span class="spec-label">Architecture</span>
+                            <span class="spec-value">ResNet-50 + Mamba SSM + Prompt Generator + MCP Head</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Key Innovation</span>
+                            <span class="spec-value">Mamba state-space model + prompt learning</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Mamba Config</span>
+                            <span class="spec-value">d_state=16 | expand=2 | selective scan</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Prompts</span>
+                            <span class="spec-value">16 prompts × 64 dims for domain adaptation</span>
+                        </div>
+                    </div>
+                    <div class="model-code"><code>model = get_mplnet(num_classes=22)</code></div>
+                </div>
+                <div class="model-card visible">
+                    <div class="model-header">
+                        <h3>EPANet-KD</h3>
+                        <span class="model-badge">PLOS ONE 2024</span>
+                    </div>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <span class="spec-label">Architecture</span>
+                            <span class="spec-value">Lightweight CNN + PAM + SAD Distillation</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Key Innovation</span>
+                            <span class="spec-value">Progressive Attention + Softened Alignment Distillation</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Efficiency</span>
+                            <span class="spec-value">3.32M params | 0.42G FLOPs</span>
+                        </div>
+                        <div class="spec">
+                            <span class="spec-label">Dataset</span>
+                            <span class="spec-value">PVCD: 4,400 images, 11 region categories</span>
+                        </div>
+                    </div>
+                    <div class="model-code"><code>EPANet: lightweight + knowledge distillation</code></div>
+                </div>
+            </div>
+            <p style="text-align:center;margin-top:24px;color:var(--text-muted);font-size:0.85rem;">
+                Full architecture diagrams (Mermaid): <a href="../MODEL_ARCHITECTURE_OVERVIEW.md" style="color:var(--primary);">MODEL_ARCHITECTURE_OVERVIEW.md</a>
+            </p>
+        </div>
+    </section>
+
     <!-- Collaboration Tracks Section -->
     <section class="section section-accent">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">04 — Target Collaboration Tracks</span>
+                <span class="section-label">06 — Target Collaboration Tracks</span>
                 <h2>Research Alignment</h2>
             </div>
             <div class="tracks-grid">
@@ -322,7 +444,7 @@
     <section id="publications" class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">05 — Publications & Patents</span>
+                <span class="section-label">07 — Publications & Patents</span>
                 <h2>Research Assets</h2>
             </div>
             <div class="pub-note">
@@ -452,7 +574,7 @@
     <section id="collaboration" class="section section-dark">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">06 — Postdoctoral Collaboration</span>
+                <span class="section-label">08 — Postdoctoral Collaboration</span>
                 <h2>For Prospective Host PIs</h2>
             </div>
             <div class="collab-intro">
@@ -484,7 +606,7 @@
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">07 — Contact</span>
+                <span class="section-label">09 — Contact</span>
                 <h2>Get in Touch</h2>
             </div>
             <div class="contact-content">

@@ -102,8 +102,26 @@ MPLNet-Cultural-Heritage-GeoAI/
 │   ├── train.py             # Full training pipeline with TensorBoard
 │   └── evaluate.py          # Comprehensive evaluation metrics
 │
-├── papers/                    # Publication references (see DOI links)
-├── POSTDOC_PORTFOLIO.md      # Postdoctoral research portfolio
+├── demo/                      # Quick inference demo
+│   ├── inference.py         # Single-image inference script
+│   └── README.md            # Demo usage instructions
+│
+├── sample_input/             # Sample images for demo
+├── sample_output/            # Demo output directory
+│
+├── images/                    # Paper figures (55 images from 4 papers)
+├── papers/                    # Publication PDFs & DOI references
+│
+├── MODEL_ARCHITECTURE_OVERVIEW.md  # Mermaid architecture diagrams
+├── POSTDOC_PORTFOLIO.md           # Postdoctoral research portfolio
+├── SCI_EVIDENCE_MATRIX.md         # Publication evidence matrix
+├── IMAGE_GALLERY.md               # Complete figure gallery
+├── MODEL_CARD.md                  # Model documentation
+├── DATASET_CARD.md                # Dataset documentation
+│
+├── requirements.txt
+└── README.md
+```
 ├── MODEL_CARD.md             # Model documentation
 ├── DATASET_CARD.md           # Dataset documentation
 │
@@ -206,7 +224,7 @@ MPLNet-Cultural-Heritage-GeoAI/
 
 | Year | Work | Journal | DOI |
 |------|------|---------|-----|
-| 2026 | MPLNet: Mamba prompt learning network | npj Heritage Science | [10.1038/s40494-025-02253-1](https://doi.org/10.1038/s40494-025-02253-1) |
+| 2026 | TV-RSI-413 and MCPNet: Decoding spatial genes of living heritage | npj Heritage Science | [10.1038/s40494-025-02253-1](https://doi.org/10.1038/s40494-025-02253-1) |
 | 2026 | MPLNet: Mamba prompt learning network | PLOS ONE | [10.1371/journal.pone.0341130](https://doi.org/10.1371/journal.pone.0341130) |
 | 2025 | Ecological suitability evaluation | PLOS ONE | [10.1371/journal.pone.0332375](https://doi.org/10.1371/journal.pone.0332375) |
 | 2024 | EPANet-KD: Knowledge distillation | PLOS ONE | [10.1371/journal.pone.0298452](https://doi.org/10.1371/journal.pone.0298452) |
@@ -289,9 +307,33 @@ pip install mamba-ssm
 
 ---
 
-## 11. Quick Start
+## 11. Quick Demo
 
-### Training
+Run semantic segmentation on a single image with a few lines:
+
+```bash
+# Quick inference (illustrative — uses random backbone weights)
+python demo/inference.py \
+    --model mcpnet \
+    --image sample_input/your_image.jpg \
+    --output sample_output/result.png
+
+# With trained weights (available upon request)
+python demo/inference.py \
+    --model mcpnet \
+    --image sample_input/your_image.jpg \
+    --checkpoint checkpoints/best_model.pth
+```
+
+> **Demo documentation:** [demo/README.md](demo/README.md)
+>
+> **Trained weights:** Available upon reasonable academic request (854238019@qq.com). Not included in this public repository.
+>
+> **Full dataset:** Available via Baidu Netdisk. Contact the author for access.
+
+---
+
+## 12. Training & Evaluation
 
 ```bash
 # Train MPLNet on TV-RSI-413
@@ -301,11 +343,8 @@ python tools/train.py \
     --epochs 100 \
     --batch_size 16 \
     --img_size 512
-```
 
-### Evaluation
-
-```bash
+# Evaluate
 python tools/evaluate.py \
     --model mplnet \
     --checkpoint ./checkpoints/best_model.pth \
@@ -316,25 +355,54 @@ python tools/evaluate.py \
 
 ---
 
-## 12. Model Zoo / Configs
+## 13. Model Architecture
 
-### Available Configurations
+Complete architecture diagrams (Mermaid) are available in [MODEL_ARCHITECTURE_OVERVIEW.md](MODEL_ARCHITECTURE_OVERVIEW.md).
 
-| Config File | Model | Dataset | Batch Size | Learning Rate |
-|-------------|-------|---------|------------|---------------|
-| `configs/mplnet_tv_rsi_413.yaml` | MPLNet | TV-RSI-413 | 16 | 1e-4 |
-| `configs/mcpnet_tv_rsi_413.yaml` | MCPNet | TV-RSI-413 | 16 | 1e-4 |
+### Quick Reference
+
+| Model | Architecture | Key Innovation | Paper |
+|-------|-------------|----------------|-------|
+| **MCPNet** | ResNet-50 + Multi-scale Context-Perceptual Head | 3-branch dilation (1, 3, 9 receptive fields) + CBAM attention | npj Heritage Science 2026 |
+| **MPLNet** | ResNet-50 + Mamba SSM + Prompt Generator + MCP Head | Mamba state-space model for long-range dependency + prompt learning for domain adaptation | PLOS ONE 2026 |
+| **EPANet-KD** | Lightweight CNN + PAM + SAD Distillation | Progressive Attention Module + Softened Alignment Distillation | PLOS ONE 2024 |
+
+### Verified Metrics
+
+| Metric | MCPNet | vs DeepLabV3+ |
+|--------|--------|---------------|
+| mAcc (Official) | 34.7% | +5.1 pp |
+| mIoU (Official) | 24.3% | +2.6 pp |
+| Acc (Operational) | 85.3% | — |
+| Params | 55.3M | — |
+| Inference | 16 FPS | — |
+
+> See [MODEL_CARD.md](MODEL_CARD.md) for full specifications and the 22-class semantic codebook.
+
+---
+## 14. Data Download / 数据下载
+
+The TV-RSI-413 dataset and PVCD dataset are available for academic research.
+
+> **Baidu Netdisk / 百度网盘:**
+> 链接请通过邮件获取 | Link available via email request.
+>
+> **Trained model weights (.pth):** Available upon reasonable academic request.
+>
+> **Contact:** 854238019@qq.com
+
+> **Note:** Large data files and model checkpoints are NOT stored in this GitHub repository. Please use the links above or contact the author directly.
 
 ---
 
-## 13. For Prospective PIs and Collaborators
+## 15. For Prospective PIs and Collaborators
 
 ### Collaboration Value
 
 This repository demonstrates capabilities suitable for joint postdoctoral projects:
 
-1. **Reproducible AI Pipeline:** Well-structured code with training/evaluation infrastructure
-2. **Domain-Specific Dataset:** TV-RSI-413 with expert annotations
+1. **Reproducible AI Pipeline:** Well-structured code with training/evaluation/demo infrastructure
+2. **Domain-Specific Dataset:** TV-RSI-413 with expert annotations (κ = 0.92)
 3. **Patent Foundation:** Filed patents on core methods
 4. **Publication Track:** Multiple journal articles in Cultural Heritage GeoAI
 5. **Heritage Application:** Clear translation from analysis to conservation planning
@@ -348,7 +416,7 @@ This repository demonstrates capabilities suitable for joint postdoctoral projec
 
 ---
 
-## 14. Citation
+## 16. Citation
 
 If this work is useful for your research, please cite:
 
@@ -366,7 +434,7 @@ If this work is useful for your research, please cite:
 
 ---
 
-## 15. License and Data Availability
+## 17. License and Data Availability
 
 **License Scope:** The MIT License applies only to original source code in this repository. Publications, datasets, images, patent documents, third-party materials, and model weights are excluded unless explicitly stated.
 
@@ -378,7 +446,7 @@ The TV-RSI-413 dataset will be made available upon final publication.
 
 ---
 
-## 16. Contact
+## 18. Contact
 
 | Channel | Information |
 |---------|-------------|
@@ -388,7 +456,7 @@ The TV-RSI-413 dataset will be made available upon final publication.
 
 ---
 
-## 17. Acknowledgments
+## 19. Acknowledgments
 
 This repository is maintained as part of postdoctoral research in Cultural Heritage GeoAI.
 
