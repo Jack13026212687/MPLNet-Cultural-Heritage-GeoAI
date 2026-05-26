@@ -1,4 +1,6 @@
+# ===========================================
 # Python
+# ===========================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -24,42 +26,135 @@ wheels/
 venv/
 env/
 ENV/
-.venv
+.venv/
+conda-env/
 
-# PyTorch
+# ===========================================
+# PyTorch / ML
+# ===========================================
 *.pth
 *.pt
+*.pth.tar
+*.ckpt
+*.onnx
+*.h5
 checkpoints/
 logs/
 runs/
+tensorboard_logs/
 
-# Data
+# ===========================================
+# Data (Large files - do not commit)
+# ===========================================
+data/
+TV-RSI-413/
+datasets/raw/
+datasets/cache/
+data/raw/
+data/private/
+data/sensitive/
+
+# Archive files
 *.zip
 *.tar
 *.tar.gz
+*.tar.bz2
 *.rar
-data/
-TV-RSI-413/
+*.7z
 
+# ===========================================
+# Publications & Patents
+# ===========================================
+# Allow: Published journal article PDFs (see papers/README.md)
+# Block: Patent application drafts, certificates, confidential materials
+*.doc
+*.docx
+*.DOC
+*.DOCX
+*patent*
+*Patent*
+*专利*
+*审查*
+*答复*
+*证书*
+*certificate*
+*Certificate*
+*private*
+*confidential*
+
+# ===========================================
+# Private / Sensitive Files
+# ===========================================
+POSTDOC_PORTFOLIO_PRIVATE.md
+private/
+cv/
+CV/
+resume/
+Resume/
+个人简历/
+简历/
+certificates/
+certs/
+*.key
+*.pem
+credentials.json
+secrets.yaml
+api_keys.*
+.env
+.env.*
+
+# ===========================================
 # Jupyter
+# ===========================================
 .ipynb_checkpoints/
 *.ipynb
+*.ipynb_checkpoints
 
+# ===========================================
 # IDE
+# ===========================================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
 Thumbs.db
+.vscode/settings.json
 
+# ===========================================
 # Logs
+# ===========================================
 *.log
 training.log
+*.log.*
 
+# ===========================================
 # Results
+# ===========================================
 results/
 outputs/
+predictions/
+evaluation_results/
+
+# ===========================================
+# CI/CD
+# ===========================================
+.github/workflows/.tmp/
+
+# ===========================================
+# Temporary Files
+# ===========================================
+.tmp/
+.temp/
+*.tmp
+*.bak
+*.backup
+
+# ===========================================
+# Documentation Build
+# ===========================================
+site/
+_build/
+docs/_build/
+*.egg-info/
