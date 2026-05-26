@@ -175,7 +175,32 @@ MPLNet-Cultural-Heritage-GeoAI/
 
 ---
 
-## 7. Related Publications
+## 7. Visual Evidence from Papers / 论文视觉证据
+
+### Flagship Paper Key Figures (npj Heritage Science 2026)
+
+| MCPNet Architecture | Per-class Performance | Segmentation Results |
+|:---:|:---:|:---:|
+| ![MCPNet Arch](images/heritage_page8_img1.jpeg) | ![Heatmap](images/heritage_page10_img1.jpeg) | ![Results](images/heritage_page13_img1.jpeg) |
+| *Multi-scale Context-Perceptual Head* | *IoU & Accuracy across 22 classes* | *MCPNet vs. DeepLabV3+ comparison* |
+
+| Dataset Overview | Class Distribution | Cross-regional Transfer |
+|:---:|:---:|:---:|
+| ![Dataset](images/heritage_page6_img1.png) | ![Distribution](images/heritage_page10_img2.jpeg) | ![Transfer](images/heritage_page15_img1.jpeg) |
+| *413 villages, 2,478 scenes, κ=0.92* | *Rank matrix across methods* | *Zero-shot to Hunan Province* |
+
+### Related Papers Key Figures
+
+| MPLNet (PLOS ONE 2026) | Ecological Suitability (PLOS ONE 2025) | EPANet-KD (PLOS ONE 2024) |
+|:---:|:---:|:---:|
+| ![MPLNet](images/zhongguan_page5_img1.png) | ![Ecological](images/hongguan_page8_img1.png) | ![EPANet](images/weiguan_page10_img1.jpeg) |
+| *Mamba prompt learning architecture* | *Spatial suitability distribution* | *Classification performance* |
+
+> **Complete figure gallery:** [IMAGE_GALLERY.md](IMAGE_GALLERY.md) — 55 figures across 4 papers with captions and research significance.
+
+---
+
+## 7.1 Related Publications
 
 **Note:** Journal-level metrics (impact factor, JCR quartile, citations) should be verified from official indexing databases.
 

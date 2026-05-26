@@ -329,8 +329,53 @@
                 <p>Journal-level metrics should be verified from official indexing databases.</p>
             </div>
             <div class="publications-tabs">
-                <button class="tab-btn active" data-tab="papers">Publications</button>
-                <button class="tab-btn" data-tab="patents">Patents</button>
+                <button class="tab-btn active" data-tab="papers" onclick="switchTab('papers')">Publications</button>
+                <button class="tab-btn" data-tab="patents" onclick="switchTab('patents')">Patents</button>
+                <button class="tab-btn" data-tab="figures" onclick="switchTab('figures')">Figures</button>
+            </div>
+            <div class="tab-content" id="figures">
+                <div class="figure-gallery">
+                    <div class="figure-row">
+                        <div class="figure-card">
+                            <img src="../images/heritage_page8_img1.jpeg" alt="MCPNet Architecture" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">MCPNet Architecture — Multi-scale Context-Perceptual Head (npj Heritage Science 2026, Fig. 7)</p>
+                        </div>
+                        <div class="figure-card">
+                            <img src="../images/heritage_page10_img1.jpeg" alt="Per-class Heatmap" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">Per-class IoU & Accuracy Heatmap — 22 semantic classes (npj Heritage Science 2026, Fig. 11)</p>
+                        </div>
+                    </div>
+                    <div class="figure-row">
+                        <div class="figure-card">
+                            <img src="../images/heritage_page13_img1.jpeg" alt="Segmentation Comparison" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">Segmentation: MCPNet vs. DeepLabV3+ — boundary-aware heritage mapping (Heritage Science 2026)</p>
+                        </div>
+                        <div class="figure-card">
+                            <img src="../images/heritage_page6_img1.png" alt="Dataset Overview" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">TV-RSI-413 Dataset: 413 villages, 2,478 scenes, κ = 0.92 — representative annotations (Fig. 5)</p>
+                        </div>
+                    </div>
+                    <div class="figure-row">
+                        <div class="figure-card">
+                            <img src="../images/zhongguan_page5_img1.png" alt="MPLNet Architecture" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">MPLNet: Mamba + Prompt Learning Architecture (PLOS ONE 2026)</p>
+                        </div>
+                        <div class="figure-card">
+                            <img src="../images/hongguan_page8_img1.png" alt="Ecological Suitability" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">Ecological Suitability Distribution — Jiangxi Province traditional villages (PLOS ONE 2025)</p>
+                        </div>
+                    </div>
+                    <div class="figure-row">
+                        <div class="figure-card">
+                            <img src="../images/weiguan_page10_img1.jpeg" alt="EPANet-KD Results" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">EPANet-KD Performance — 3.32M params, 0.42G FLOPs (PLOS ONE 2024)</p>
+                        </div>
+                        <div class="figure-card">
+                            <img src="../images/heritage_page15_img1.jpeg" alt="Cross-regional Transfer" style="width:100%;border-radius:4px;" loading="lazy">
+                            <p class="figure-cap">Cross-regional Zero-shot Transfer — Jiangxi → Hunan Province (npj Heritage Science 2026)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="tab-content active" id="papers">
                 <div class="pub-list">
@@ -502,15 +547,17 @@
     </footer>
 
     <script>
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
+        // Tab functionality for Publications/Patents/Figures
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display='none');
+            const btn = document.querySelector('[data-tab="'+tabId+'"]');
+            if (btn) btn.classList.add('active');
+            const content = document.getElementById(tabId);
+            if (content) content.style.display='block';
+        }
+        // Initialize: show first tab
+        document.querySelectorAll('.tab-content').forEach((c,i) => { c.style.display = (i===0) ? 'block' : 'none'; });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
